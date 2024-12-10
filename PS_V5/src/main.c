@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vagarcia <vagarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 12:57:48 by vagarcia          #+#    #+#             */
-/*   Updated: 2024/12/05 18:45:52 by vagarcia         ###   ########.fr       */
+/*   Updated: 2024/12/09 12:49:05 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,23 +27,26 @@ void    print_stack(int **a, int **b)
         ft_printf("%d: %d | %d\n", k++, a[i++], b[f++]);
 }
 
-void    *init_stack(int amount, int **b)
+void    *init_stack(int amount, int ***b)
 {
     int i;
 
-    if (!b)
+    if (!*b)
     {
-        b = ft_calloc(sizeof(int *), amount + 1);
-        if (!b)
-            return (free_stack(b), NULL);
+        *b = ft_calloc(amount + 1, sizeof(int *));
+        if (!*b)
+            return (free_stack(*b), NULL);
     }
     i = 0;
     while (i < amount)
     {
-        b[i] = NULL;
+        (*b)[i] = ft_calloc(1, sizeof(int));
+        if (!(*b)[i])
+            return (free_stack(*b), NULL);
         i++;
     }
-    return (b);
+    (*b)[i] = NULL;
+    return (*b);
 }
 
 int main(int ac, char **av)
@@ -62,14 +65,10 @@ int main(int ac, char **av)
     else
     {
         stack_a = put_in_stack(av, ac);
-        stack_b = init_stack(ac, stack_b);
         print_stack(stack_a, stack_b);
-        //if (!stack_b || !stack_a)
-        //   quit(stack_a, stack_b, 1);
-        //rra(stack_a);
-        //ra(stack_a);
+        if (!init_stack(ac, &stack_b))
+            quit(stack_a, stack_b, 1);
         pa(stack_a, stack_b);
-        //sa(stack_a);
         print_stack(stack_a, stack_b);
     }
     if (sorted(stack_a, stack_b) == 1)

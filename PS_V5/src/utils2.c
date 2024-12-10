@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vagarcia <vagarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 13:25:33 by vagarcia          #+#    #+#             */
-/*   Updated: 2024/12/05 15:16:30 by vagarcia         ###   ########.fr       */
+/*   Updated: 2024/12/09 13:04:12 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ void	free_stack(int **stack)
 	stack = NULL;
 }
 
-int nb = -2147483647;
 
 void	quit(int **stack_a, int **stack_b, int yayornay)
 {

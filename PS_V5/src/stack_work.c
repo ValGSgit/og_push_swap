@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stack_work.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vagarcia <vagarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 15:04:29 by vagarcia          #+#    #+#             */
-/*   Updated: 2024/12/05 17:17:45 by vagarcia         ###   ########.fr       */
+/*   Updated: 2024/12/09 12:50:09 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,21 +34,23 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	return ((void *)ptr);
 }
 
-int	**put_in_stack(char **av, int ac)
+int **put_in_stack(char **av, int ac)
 {
-	int			i;
-	int			**a;
-    
-	i = 0;
-	a = ft_calloc(ac + 1, sizeof(int *));
-	if (!a)
-		return (free_stack(a), free_input(av), NULL);
-	while (i < ac)
-	{
-		a[i] = (int *)ft_atoi(av[i]);
-		i++;
-	}
-	free_input(av);
-	av = NULL;
-    return (a);
+    int **stack;
+    int i;
+
+    stack = ft_calloc(ac + 1, sizeof(int *));
+    if (!stack)
+        return NULL;
+    i = 0;
+    while (i < ac)
+    {
+        stack[i] = ft_calloc(1, sizeof(int));
+        if (!stack[i])
+            return (free_stack(stack), NULL);
+        *stack[i] = ft_atoi(av[i]);
+        i++;
+    }
+    stack[i] = NULL;
+    return stack;
 }
